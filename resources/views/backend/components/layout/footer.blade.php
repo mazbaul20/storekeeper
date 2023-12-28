@@ -12,7 +12,8 @@
   {{-- <script src="{{asset('backend/assets/js/index.js')}}"></script> --}}
   <!-- Main JS-->
   <script src="{{asset('backend/assets/js/main.js')}}"></script>
-
+  <script src="{{ asset('http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js') }}"></script>
+  {!! Toastr::message() !!}
 
 </body>
 

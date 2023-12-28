@@ -30,7 +30,8 @@
   <link rel="stylesheet" href="{{ asset('backend/assets/css/custom/toastify.min.css') }}">
 
   <link href="{{asset('backend/assets/css/custom/dataTables.min.css')}}" rel="stylesheet"/>
-  {{-- <script src="{{asset('backend/assets/js/custom/jquery-3.7.0.min.js')}}"></script> --}}
+  <link href="{{asset('http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css')}}" rel="stylesheet"/>
+  
   <script src="{{ asset('backend/assets/js/jquery.min.js') }}"></script>
   <script src="{{asset('backend/assets/js/custom/jquery.dataTables.min.js')}}"></script>
 
@@ -39,7 +40,7 @@
   <script src="{{ asset('backend/assets/js/custom/config.js') }}"></script>
   <script src="{{asset('backend/assets/js/bootstrap.bundle.min.js')}}"></script>
   
-  <title>ProInfo - Admin Dashboard</title>
+  <title>Assignment-11 class</title>
 </head>
 
 <body>

@@ -28,31 +28,32 @@ class SaleController extends Controller
             // Quantity is less than 1
             Toastr::warning('Stock Out', 'Title',["positionClass"=>"toast-top-center"]);
             return redirect()->back();
-        } elseif ($p_quantity < $t_quantity) {
+        }elseif ($p_quantity < $t_quantity){
             // For low Stock
             Toastr::warning('Low Stock', 'Title', ["positionClass" => "toast-top-center"]);
             return redirect()->back();
+        }else{
+            // Calculate sale quantity
+            $update_quantity = $p_quantity - $t_quantity;
+
+            // Calculate total price
+            $totalPrice = $product->price * $request->input('quantity');
+
+            // Insert data into the transactions table
+            DB::table('transactions')->insert([
+                'customer_name' => $request->input('customer_name'),
+                'product_id' => $product->id,
+                'product_name' => $product->product_name,
+                'quantity' => $request->input('quantity'),
+                'unit_price' => $product->price,
+                'total_price' => $totalPrice
+            ]);
+
+            DB::table('products')->where('id', $product->id)->update([
+                'quantity' => $update_quantity
+            ]);
+            Toastr::success('Successfull','Title',["positionClass" => "toast-top-center"]);
+            return redirect()->route('transactions.page');
         }
-        // Calculate sale quantity
-        $update_quantity = $p_quantity - $t_quantity;
-
-        // Calculate total price
-        $totalPrice = $product->price * $request->input('quantity');
-
-        // Insert data into the transactions table
-        DB::table('transactions')->insert([
-            'customer_name' => $request->input('customer_name'),
-            'product_id' => $product->id,
-            'product_name' => $product->product_name,
-            'quantity' => $request->input('quantity'),
-            'unit_price' => $product->price,
-            'total_price' => $totalPrice
-        ]);
-
-        DB::table('products')->where('id', $product->id)->update([
-            'quantity' => $update_quantity
-        ]);
-        Toastr::success('Successfull','Title',["positionClass" => "toast-top-center"]);
-        return redirect()->route('transactions.page');
     }
 }
